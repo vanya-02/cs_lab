@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import (QMainWindow, QApplication, QPlainTextEdit, QAction,
 from PyQt5 import uic
 import sys
 from jparser import parserf
+from pprint import pprint
 
 class UI(QMainWindow):
     def __init__(self):
@@ -32,7 +33,7 @@ class UI(QMainWindow):
     # 	self.textedit.setPlainText("")
     def getfile(self):
         fname = QFileDialog.getOpenFileName(self, "Open File", "C:\\", "Audit Files (*.audit)")
-        print(fname)
+        # print(fname)
 
         self.plainTextEdit.appendPlainText(parserf(fname[0]))
 
