@@ -8,6 +8,8 @@ class UI(QMainWindow):
     def __init__(self):
         super(UI, self).__init__()
 
+        self.parsed = None
+
         # Load the ui file
         uic.loadUi("loadui.ui", self)
 
@@ -17,9 +19,9 @@ class UI(QMainWindow):
         self.actionSave = self.findChild(QAction, "actionSave")
 
         # Do something
-        # self.button.clicked.connect(self.clicker)
         # self.clear_button.clicked.connect(self.clearer)
         self.actionLoad.triggered.connect(self.getfile)
+        self.actionSave.triggered.connect(self.savefile)
 
         # Show The App
         self.show()
@@ -34,9 +36,14 @@ class UI(QMainWindow):
     def getfile(self):
         fname = QFileDialog.getOpenFileName(self, "Open File", "C:\\", "Audit Files (*.audit)")
         # print(fname)
+        self.parsed = parserf(fname[0])
+        self.plainTextEdit.appendPlainText(self.parsed)
 
-        self.plainTextEdit.appendPlainText(parserf(fname[0]))
-
+    def savefile(self):
+        if self.parsed:
+            fname = QFileDialog.getSaveFileName(self, "Save as", "C:\\", "JSON File (*.json)")
+            with open(fname[0], 'w') as file:
+                file.write(self.parsed)
 
 
 # Initialize The App
