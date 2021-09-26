@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import (QMainWindow, QApplication, QPlainTextEdit, QAction,
 from PyQt5 import uic
 import sys
 from jparser import parserf
-from pprint import pprint
+
 
 class UI(QMainWindow):
     def __init__(self):
